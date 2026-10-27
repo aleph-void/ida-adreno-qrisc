@@ -4,6 +4,7 @@
        We model a synthetic call-stack pointer 'csp' over the 'stack' space so the
        decompiler can render call/ret as functions. -->
   <global>
+    <range space="code"/>
     <range space="MEM"/>
     <range space="CREG"/>
     <range space="SREG"/>
