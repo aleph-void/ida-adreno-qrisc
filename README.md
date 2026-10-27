@@ -9,7 +9,7 @@ firmware cores (ZAP, GMU). Legacy a5xx PFP+PM4 loads but isn't fully tested.
 | Backend  | What you get | Status |
 |----------|--------------|--------|
 | IDA Pro 9.x | Processor module + loader: disassembly, xrefs, packet-table -> `CP_*` handler naming | 99.89% instruction match vs `qrisc-disasm` on real `a740_sqe.fw` |
-| Ghidra 12.x | SLEIGH language: disassembly + decompiler (Hex-Rays has no third-party decompiler API; SLEIGH does) | Compiles cleanly; headless decode matches the oracle |
+| Ghidra 12.x | SLEIGH language: disassembly + decompiler (Hex-Rays has no third-party decompiler API; SLEIGH does) | Ghidra-Rare fork: decode matches `qrisc-disasm` on every tested word, p-code checked in the emulator ([`GHIDRA-RARE.md`](ghidra/Ghidra/Processors/QRisc/GHIDRA-RARE.md)); prebuilt zips on the Releases page |
 
 One ISA generator reads Mesa's `qrisc.xml` / `adreno_pm4.xml` /
 `adreno_control_regs.xml` and emits standalone Python tables. Neither runtime
@@ -65,7 +65,7 @@ python3 tests/test_disasm.py
 | `a730_sqe.fw` (a7xx, ~75 KB) | Bootstrap emulator recovers packet table + BR/BV/LPAC split |
 | `a740_sqe.fw` (a7xx, ~75 KB) | 17,455 / 17,474 = 99.89% match vs `qrisc-disasm` |
 | `gen80000/80100/80200_sqe.fw` (a8xx) | Loads; ~93-94% decode coverage. All shipped blobs carry the patched CVE-2025-21479 mask (`& 0x7`); the vulnerable `& 0x3` is absent |
-| Ghidra SLEIGH (a6xx, a7xx, a8xx) | All three compile under 12.1.2; headless decode matches |
+| Ghidra SLEIGH (a6xx, a7xx, a7xx_gen3, a8xx) | Compile under 12.1.3, 12.1.4 and 12.2; a6xx/a7xx/a7xx_gen3 decode matches `qrisc-disasm` (Ghidra-Rare fork, see `GHIDRA-RARE.md`); a8xx unverified (Mesa has no a8xx support) |
 | `pytest` | 47 / 47 |
 
 ## Layout

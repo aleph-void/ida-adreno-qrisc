@@ -1,5 +1,13 @@
 # QRisc SLEIGH validation
 
+> Ghidra-Rare fork: this is the original v1 report. The current verification
+> (Ghidra 12.1.3/12.1.4/12.2, decode differential against `qrisc-disasm`,
+> emulator cases, real firmware) is in
+> [`Ghidra/Processors/QRisc/GHIDRA-RARE.md`](Ghidra/Processors/QRisc/GHIDRA-RARE.md).
+> Every approximation in section 4 and the cosmetic differences in section 2
+> are fixed there; the p-code no longer uses pcodeops for register and memory
+> accesses.
+
 Environment: Ghidra 12.1.2 (public release), OpenJDK 21. The compiler and a
 headless decode test were run locally; results are reproducible.
 
